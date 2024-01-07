@@ -9,10 +9,10 @@ Use Case
 
 Lihat Menu: Pengguna dapat melihat daftar menu yang tersedia.
 Isi Data: Pengguna melakukan pengisian data pengguna dan menu yang diinginkan.
-Transaksi: Pengguna dapat memilih Metode Pembayaran yang diinginkan
-Riwayat: Pengguna dapat melihat data yang sudah di pesan
+Transaksi: Pengguna dapat memilih Metode Pembayaran yang diinginkan.
+Riwayat: Pengguna dapat melihat data yang sudah di pesan.
 Edit Data: Pengguna dapat mengedit data.
 
-Pembagian
+Pembagian:
 Silviana Chandra carera: Halaman Home, Halaman Isi Data, Halaman Metode Pembayaran
 Asrul: Halaman Riwayat, Halaman Edit
