@@ -16,4 +16,5 @@ Edit Data: Pengguna dapat mengedit data.
 
 Pembagian:
 Silviana Chandra carera: Halaman Home, Halaman Isi Data, Halaman Metode Pembayaran
+
 Asrul: Halaman Riwayat, Halaman Edit
