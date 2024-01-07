@@ -5,6 +5,7 @@ Deskripsi Project
 Aplikasi ini dibuat untuk membantu pengguna melakukan pemesanan sehingga pengguna tidak antri dalam pemesanan. Aplikasi ini dikembangkan dengan menyimpan data di Firebase FireStore. Untuk lebih rinci dapat dilihat dalam diagram usecase dibawah ini.
 
 Use Case
+
 ![image](https://github.com/Carera12/ProjectUAS_063_122/assets/114927603/d95859db-2447-4099-b194-ee3a5664035d)
 
 Lihat Menu: Pengguna dapat melihat daftar menu yang tersedia.
