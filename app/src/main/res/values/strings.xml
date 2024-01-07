@@ -1,4 +1,16 @@
 <resources>
-    <string name="app_name">ProjectUAS</string>
+    <string name="app_name">OrderMe</string>
     <string name="order">Order</string>
+    <string name="vanilla">Vanila</string>
+    <string name="lemon">Lemon</string>
+    <string name="natural">Natural</string>
+    <string name="milk">Milky</string>
+    <string name="lyche">Lychee</string>
+    <string name="paket1">Pisang Goreng</string>
+    <string name="paket2">French Fries</string>
+    <string name="paket3">Roti Bakar</string>
+    <string name="paket4">Ubi Goreng</string>
+    <string name="paket5">Sosis Goreng</string>
+    <string name="back_button">Kembali</string>
+    <string name="submit_button">Submit</string>
 </resources>
