@@ -20,8 +20,8 @@ interface OrderDao {
     suspend fun delete(order: Order)
 
     @Query("SELECT * from tblSiswa WHERE id = :id")
-    fun getSiswa(id: Int): Flow<Order>
+    fun getOrder(id: Int): Flow<Order>
 
     @Query("SELECT * from tblSiswa ORDER BY nama ASC")
-    fun getAllSiswa(): Flow<List<Order>>
+    fun getAllOrder(): Flow<List<Order>>
 }
