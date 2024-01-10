@@ -116,7 +116,7 @@ fun IsiStart(
                 modifier = Modifier.weight(1f),
                 onClick = onNextButtonClicked
             ) {
-                Text(stringResource(R.string.next))
+                Text(stringResource(R.string.order))
             }
         }
     }
