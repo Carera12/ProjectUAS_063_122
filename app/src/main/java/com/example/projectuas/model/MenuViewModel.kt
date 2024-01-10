@@ -11,7 +11,6 @@ import java.text.NumberFormat
 private const val HARGA_PER_CUP = 3000
 class MenuViewModel : ViewModel() {
     private val _stateUI = MutableStateFlow(DetailOrder())
-    val stateUI: StateFlow<DetailOrder> = _stateUI.asStateFlow()
 
     fun setJumlah(jmlEsJumbo:Int){
         _stateUI.update { stateSaatIni ->
@@ -52,7 +51,8 @@ data class DetailOrder(
     val jumlah: Int = 0,
     val minuman: String = "",
     val makanan: String = "",
-    val harga: String = ""
+    val harga: String = "",
+    val transaksi: String = ""
 )
 
 /*Fungsi untuk mengkonversi data input ke data dalam tabel sesuai jenis datanya*/
@@ -64,7 +64,8 @@ fun DetailOrder.toOrder(): Order = Order(
     jumlah = 0,
     minuman = minuman,
     makanan = makanan,
-    harga = harga
+    harga = harga,
+    transaksi = transaksi
 )
 
 fun Order.toUiStateOrder(): UIStateOrder = UIStateOrder(
@@ -79,5 +80,6 @@ fun Order.toDetailOrder(): DetailOrder = DetailOrder(
     jumlah = 0,
     minuman = minuman,
     makanan = makanan,
-    harga = harga
+    harga = harga,
+    transaksi = transaksi
 )

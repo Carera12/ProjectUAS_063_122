@@ -13,7 +13,8 @@ data class Order(
     val jumlah: Int = 0,
     val minuman: String = "",
     val makanan: String = "",
-    val harga: String = ""
+    val harga: String = "",
+    val transaksi: String = ""
 )
 
 
