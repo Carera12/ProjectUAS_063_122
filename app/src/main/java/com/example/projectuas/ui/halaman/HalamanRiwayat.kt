@@ -7,17 +7,58 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.projectuas.R
 import com.example.projectuas.model.DetailOrder
+import com.example.projectuas.navigasi.DestinasiNavigasi
+import com.example.projectuas.navigasi.OrderTopAppBar
+import com.example.projectuas.ui.komponen.FormatLabelHarga
+import kotlinx.coroutines.launch
 
+
+object DestinasiRiwayat : DestinasiNavigasi {
+    override val route: String = "Riwayat"
+    override val titleRes: Int = R.string.app_name
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HalamanRiwayat(
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    Scaffold(
+        modifier =modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            OrderTopAppBar(
+                title = stringResource(DestinasiRiwayat.titleRes),
+                canNavigateBack = true,
+                scrollBehavior = scrollBehavior)
+        }
+    ) {innerPadding ->
+        IsiRiwayat(
+            detailOrder = DetailOrder(),
+            onCancelButtonClicked = navigateBack,
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
+}
 @Composable
 fun IsiRiwayat(
     detailOrder: DetailOrder,
@@ -71,7 +112,9 @@ fun IsiRiwayat(
                 dimensionResource(R.dimen.thickness_divider))
             }
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
-
+            FormatLabelHarga(subtotal = detailOrder.harga,
+                modifier = Modifier.align(Alignment.End)
+            )
         }
     Column(
         modifier = modifier,
