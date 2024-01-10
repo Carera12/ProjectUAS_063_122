@@ -26,7 +26,6 @@ import com.example.projectuas.R
 
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IsiTransaksi(
     modeTransaksi: List<String>,

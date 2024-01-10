@@ -15,4 +15,11 @@ object DataOrder {
         R.string.paket3,
         R.string.paket4
     )
+    val transaksi = listOf(
+        R.string.mode1,
+        R.string.mode2,
+        R.string.mode3,
+        R.string.mode4,
+        R.string.mode5
+    )
 }
