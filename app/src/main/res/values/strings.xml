@@ -17,4 +17,12 @@
     <string name="mode3">Dana</string>
     <string name="mode4">Shoope Pay</string>
     <string name="mode5">Cash</string>
+    <string name="nama">Nama</string>
+    <string name="alamat">Alamat</string>
+    <string name="notelp">No Telepon</string>
+    <string name="jumlah">Total</string>
+    <string name="minuman">Minuman</string>
+    <string name="makanan">Makanan</string>
+    <string name="harga">Harga</string>
+    <string name="transaksi">Metode Pembayaran</string>
 </resources>
