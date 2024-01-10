@@ -29,9 +29,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projectuas.R
 import com.example.projectuas.data.DataOrder.transaksi
 import com.example.projectuas.model.TransaksiViewModel
+import com.example.projectuas.navigasi.DestinasiNavigasi
 import com.example.projectuas.navigasi.OrderTopAppBar
 
-
+object DestinasiTransaksi : DestinasiNavigasi {
+    override val route: String = "Menu"
+    override val titleRes: Int = R.string.app_name
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HalamanTransaksi(
@@ -45,7 +49,7 @@ fun HalamanTransaksi(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             OrderTopAppBar(
-                title = stringResource(DestinasiStart.titleRes),
+                title = stringResource(DestinasiTransaksi.titleRes),
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior
             )
