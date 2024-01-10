@@ -12,6 +12,9 @@ private const val HARGA_PER_CUP = 3000
 class MenuViewModel : ViewModel() {
     private val _stateUI = MutableStateFlow(DetailOrder())
 
+    fun resetOrder(){
+        _stateUI.value = DetailOrder()
+    }
     fun setJumlah(jmlEsJumbo:Int){
         _stateUI.update { stateSaatIni ->
             stateSaatIni.copy(

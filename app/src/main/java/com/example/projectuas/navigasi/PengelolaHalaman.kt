@@ -16,9 +16,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projectuas.R
+import com.example.projectuas.model.MenuViewModel
 import com.example.projectuas.ui.halaman.DestinasiMenu
 import com.example.projectuas.ui.halaman.DestinasiStart
+import com.example.projectuas.ui.halaman.DestinasiTransaksi
 import com.example.projectuas.ui.halaman.HalamanMenu
+import com.example.projectuas.ui.halaman.HalamanTransaksi
 import com.example.projectuas.ui.halaman.HomeStart
 
 @Composable
@@ -52,8 +55,9 @@ fun OrderTopAppBar(
 }
 
 @Composable
-fun HostNavigasi(navController: NavHostController,
-                 modifier: Modifier = Modifier
+fun HostNavigasi(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
@@ -62,21 +66,25 @@ fun HostNavigasi(navController: NavHostController,
     ) {
         composable(DestinasiStart.route){
             HomeStart(
-                navigateHome = {navController.navigate(DestinasiMenu.route) },
-
-                )
-
+                navigateHome = { navController.navigate(DestinasiMenu.route) } // Pindahkan navigasi ke halaman menu di sini
+            )
         }
         composable(DestinasiMenu.route){
             HalamanMenu(
-                navigateSave = {  },
-                navigateCancel = {  },
-                )
-
+                navigateSave = { navController.navigate(DestinasiTransaksi.route) },
+                navigateCancel = { navController.popBackStack() }
+            )
         }
-
+        composable(DestinasiTransaksi.route){
+            HalamanTransaksi(
+                navigateOrder = { /*TODO*/ },
+                navigateNoOrder = { /*TODO*/ }
+            )
+        }
     }
 }
+
+
 
 
 

@@ -71,8 +71,8 @@ fun HalamanMenu(
             onSelectionMakanan = {viewModel.setMakanan(it)},
             onSelectionMinuman = {viewModel.setMinuman(it)},
             onConfirmButtonClicked = {viewModel.setJumlah(it)},
-            onNextButtonClicked = {navigateSave },
-            onCancelButtonClicked = { navigateCancel },
+            onNextButtonClicked = navigateSave ,
+            onCancelButtonClicked =  navigateCancel ,
             modifier = Modifier.padding(innerPadding)
         )
     }

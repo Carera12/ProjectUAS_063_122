@@ -33,14 +33,14 @@ import com.example.projectuas.navigasi.DestinasiNavigasi
 import com.example.projectuas.navigasi.OrderTopAppBar
 
 object DestinasiTransaksi : DestinasiNavigasi {
-    override val route: String = "Menu"
+    override val route: String = "Transaksi"
     override val titleRes: Int = R.string.app_name
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HalamanTransaksi(
-    navigateSave: () -> Unit,
-    navigateCancel: () -> Unit,
+    navigateOrder: () -> Unit,
+    navigateNoOrder: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: TransaksiViewModel = viewModel()
 ) {
@@ -60,8 +60,8 @@ fun HalamanTransaksi(
         IsiTransaksi(
             modeTransaksi = transaksi.map { id -> context.resources.getString(id)},
             onSelectionTransaksi = {viewModel.setTransaksi(it)},
-            onNextButtonClicked = { navigateSave },
-            onCancelButtonClicked = { navigateCancel },
+            onNextButtonClicked =  navigateOrder ,
+            onCancelButtonClicked = navigateNoOrder ,
             modifier = Modifier.padding(innerPadding)
         )
     }
