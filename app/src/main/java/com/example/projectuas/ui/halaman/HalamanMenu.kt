@@ -22,17 +22,43 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.projectuas.R
+import com.example.projectuas.data.DataOrder.makanan
+import com.example.projectuas.data.DataOrder.minuman
+import com.example.projectuas.data.Order
+import com.example.projectuas.model.MenuViewModel
 
 @Composable
 fun MenuOrderView() {
 }
 
-
+@Composable
+fun BodyMenu(
+    onOrderValueChange: (Order) -> Unit,
+    onSaveClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: MenuViewModel
+) {
+    Column (
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
+        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+    ) {
+        val context = LocalContext.current
+        IsiMenu(
+            menumakanan = makanan.map {id -> context.resources.getString(id)},
+            menuminuman = minuman.map {id -> context.resources.getString(id)},
+            onSelectionMakanan = {viewModel.setMakanan(it)},
+            onSelectionMinuman = {viewModel.setMinuman(it)},
+            onConfirmButtonClicked = {viewModel.setJumlah(it)},
+            onNextButtonClicked = {  },
+            onCancelButtonClicked = {  })
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
