@@ -12,6 +12,18 @@ private const val HARGA_PER_CUP = 3000
 class MenuViewModel : ViewModel() {
     private val _stateUI = MutableStateFlow(DetailOrder())
 
+    fun setRiwayat(listContact: MutableList<String>) {
+        _stateUI.update { stateSaatIni ->
+            stateSaatIni.copy(
+                nama = listContact[0],
+                alamat = listContact[1],
+                noTelp = listContact[2],
+                makanan = listContact[3],
+                minuman = listContact[4],
+                transaksi = listContact[5],
+            )
+        }
+    }
     fun resetOrder(){
         _stateUI.value = DetailOrder()
     }

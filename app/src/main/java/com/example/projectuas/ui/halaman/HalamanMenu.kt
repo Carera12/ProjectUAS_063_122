@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +38,7 @@ import com.example.projectuas.R
 import com.example.projectuas.data.DataOrder.makanan
 import com.example.projectuas.data.DataOrder.minuman
 import com.example.projectuas.model.MenuViewModel
+import com.example.projectuas.model.RiwayatViewModel
 import com.example.projectuas.navigasi.DestinasiNavigasi
 import com.example.projectuas.navigasi.OrderTopAppBar
 
@@ -71,7 +73,7 @@ fun HalamanMenu(
             onSelectionMakanan = {viewModel.setMakanan(it)},
             onSelectionMinuman = {viewModel.setMinuman(it)},
             onConfirmButtonClicked = {viewModel.setJumlah(it)},
-            onNextButtonClicked = navigateSave ,
+            onNextButtonClicked =    navigateSave,
             onCancelButtonClicked =  navigateCancel ,
             modifier = Modifier.padding(innerPadding)
         )
