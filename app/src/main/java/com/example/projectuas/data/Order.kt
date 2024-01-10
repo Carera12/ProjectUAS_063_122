@@ -1,7 +1,12 @@
 package com.example.projectuas.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "tblSiswa")
 data class Order(
-    val id: String = "",
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val nama: String = "",
     val alamat: String = "",
     val noTelp: String = "",
@@ -9,8 +14,6 @@ data class Order(
     val minuman: String = "",
     val makanan: String = "",
     val harga: String = ""
-){
-    constructor(): this("","","","",0,"","","")
-}
+)
 
 
