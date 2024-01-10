@@ -2,7 +2,7 @@ Nama Project
 OrderMe
 
 Deskripsi Project
-Aplikasi ini dibuat untuk membantu pengguna melakukan pemesanan sehingga pengguna tidak antri dalam pemesanan. Aplikasi ini dikembangkan dengan menyimpan data di Firebase FireStore. Untuk lebih rinci dapat dilihat dalam diagram usecase dibawah ini.
+Aplikasi ini dibuat untuk membantu pengguna melakukan pemesanan sehingga pengguna tidak antri dalam pemesanan. Aplikasi ini dikembangkan dengan menyimpan data di Roomdatabase. Untuk lebih rinci dapat dilihat dalam diagram usecase dibawah ini.
 
 Use Case
 
