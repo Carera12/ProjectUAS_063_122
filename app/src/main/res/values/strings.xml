@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">OrderMe</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
     <string name="order">Order</string>
     <string name="vanilla">Vanila</string>
     <string name="lemon">Lemon</string>
