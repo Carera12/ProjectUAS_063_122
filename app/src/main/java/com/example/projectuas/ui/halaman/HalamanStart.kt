@@ -1,4 +1,4 @@
-package com.example.projectuas.model
+package com.example.projectuas.ui.halaman
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
