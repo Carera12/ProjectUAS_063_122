@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668281613082",
+    "project_id": "projectuas-reraasrul",
+    "storage_bucket": "projectuas-reraasrul.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668281613082:android:9fcf2d5bcbcb04ed2ddaa3",
+        "android_client_info": {
+          "package_name": "com.example.projectuas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2pXtOhyM435U0f6L-L4X7OeaxCH3oUY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

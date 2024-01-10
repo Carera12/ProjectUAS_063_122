@@ -1,4 +1,4 @@
-package com.example.projectuas.model
+package com.example.projectuas.data
 
 import com.example.projectuas.R
 

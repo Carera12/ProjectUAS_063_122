@@ -1,4 +1,4 @@
-package com.example.projectuas.model
+package com.example.projectuas.data
 
 data class Order(
     val id: String = "",
