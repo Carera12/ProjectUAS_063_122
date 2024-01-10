@@ -7,14 +7,12 @@ object DataOrder {
         R.string.natural,
         R.string.vanilla,
         R.string.lemon,
-        R.string.milk,
-        R.string.lyche
+        R.string.milk
     )
     val makanan = listOf(
         R.string.paket1,
         R.string.paket2,
         R.string.paket3,
-        R.string.paket4,
-        R.string.paket5
+        R.string.paket4
     )
 }

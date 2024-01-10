@@ -16,7 +16,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projectuas.R
+import com.example.projectuas.ui.halaman.DestinasiMenu
 import com.example.projectuas.ui.halaman.DestinasiStart
+import com.example.projectuas.ui.halaman.HalamanMenu
 import com.example.projectuas.ui.halaman.HomeStart
 
 @Composable
@@ -59,10 +61,22 @@ fun HostNavigasi(navController: NavHostController,
         modifier = Modifier
     ) {
         composable(DestinasiStart.route){
-            HomeStart(navigateHome = { })
+            HomeStart(
+                navigateHome = {navController.navigate(DestinasiMenu.route) },
+
+                )
+
+        }
+        composable(DestinasiMenu.route){
+            HalamanMenu(
+                navigateSave = {  },
+                navigateCancel = {  },
+                )
 
         }
 
     }
 }
+
+
 
