@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -61,6 +62,7 @@ fun OrderTopAppBar(
 fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    viewModel: MenuViewModel = viewModel()
 ) {
     NavHost(
         navController = navController,
@@ -73,26 +75,19 @@ fun HostNavigasi(
             )
         }
         composable(DestinasiForm.route){
-            HalamanForm(
-                navigateSave = {navController.navigate(DestinasiMenu.route)},
-                navigateCancel = { navController.popBackStack() })
+            HalamanForm(navigateBack = { navController.navigate(DestinasiRiwayat.route) })
         }
         composable(DestinasiMenu.route){
             HalamanMenu(
                 navigateSave = {
+
                     navController.navigate(DestinasiRiwayat.route) },
-                navigateCancel = { navController.popBackStack() }
+                navigateCancel = { navController.navigate(DestinasiForm.route)}
             )
         }
-//        composable(DestinasiTransaksi.route){
-//            HalamanTransaksi(
-//                navigateOrder = { navController.navigate(DestinasiRiwayat.route) },
-//                navigateNoOrder = { /*TODO*/ }
-//            )
-//        }
+
         composable(DestinasiRiwayat.route){
-            HalamanRiwayat(
-                navigateBack = { })
+            HalamanRiwayat(navigateToItemEntry = { /*TODO*/ })
         }
     }
 }
