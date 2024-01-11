@@ -4,9 +4,9 @@
     <string name="confirm">Konfirmasi</string>
     <string name="back">Back</string>
     <string name="order">Order</string>
-    <string name="vanilla">Vanila</string>
-    <string name="lemon">Lemon</string>
-    <string name="natural">Natural</string>
+    <string name="vanilla">Paket 1</string>
+    <string name="lemon">Paket 2</string>
+    <string name="natural">Paket 3</string>
     <string name="milk">Milky</string>
     <string name="paket1">Pisang Goreng</string>
     <string name="paket2">French Fries</string>
