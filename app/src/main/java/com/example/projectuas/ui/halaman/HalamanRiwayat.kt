@@ -25,6 +25,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.projectuas.R
+import com.example.projectuas.data.Order
 import com.example.projectuas.model.DetailOrder
 import com.example.projectuas.navigasi.DestinasiNavigasi
 import com.example.projectuas.navigasi.OrderTopAppBar
@@ -56,7 +57,7 @@ fun HalamanRiwayat(
         }
     ) {innerPadding ->
         IsiRiwayat(
-            detailOrder = DetailOrder(),
+            order = Order(),
             onCancelButtonClicked = navigateBack,
             modifier = Modifier.padding(innerPadding)
         )
@@ -64,70 +65,60 @@ fun HalamanRiwayat(
 }
 @Composable
 fun IsiRiwayat(
-    detailOrder: DetailOrder,
+    order: Order,
     onCancelButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
-) {
-    val items = listOf(
-        Pair(stringResource(R.string.jumlah), detailOrder.jumlah),
-        Pair(stringResource(R.string.makanan), detailOrder.makanan),
-        Pair(stringResource(R.string.transaksi), detailOrder.transaksi)
-    )
+) {val items = listOf(
+    Pair(stringResource(R.string.jumlah), order.jumlah),
+    Pair(stringResource(R.string.makanan), order.makanan),
+    Pair(stringResource(R.string.transaksi), order.transaksi)
+
+)
 
     Column (
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Column(
-            modifier =
+        Column (
+            modifier=
             Modifier.padding(dimensionResource(R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ) {
             Text(text = "Nama")
-            Text(text = detailOrder.nama)
-            Divider(
-                thickness =
-                dimensionResource(R.dimen.thickness_divider)
-            )
+            Text(text = order.nama)
+            Divider(thickness =
+            dimensionResource(R.dimen.thickness_divider))
             Text(text = "Alamat")
-            Text(text = detailOrder.alamat)
-            Divider(
-                thickness =
-                dimensionResource(R.dimen.thickness_divider)
-            )
+            Text(text = order.alamat)
+            Divider(thickness =
+            dimensionResource(R.dimen.thickness_divider))
             Text(text = "No Telepon")
-            Text(text = detailOrder.noTelp)
-            Divider(
-                thickness =
-                dimensionResource(R.dimen.thickness_divider)
-            )
-
+            Text(text = order.noTelp)
+            Divider(thickness =
+            dimensionResource(R.dimen.thickness_divider))
             items.forEach { item ->
                 Column {
                     Text(item.first.uppercase())
                     Text(text = item.second.toString(), fontWeight = FontWeight.Bold)
                 }
-                Divider(
-                    thickness =
-                    dimensionResource(R.dimen.thickness_divider)
-                )
+                Divider(thickness =
+                dimensionResource(R.dimen.thickness_divider))
             }
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
-            FormatLabelHarga(
-                subtotal = detailOrder.harga,
+            FormatLabelHarga(subtotal = order.harga,
                 modifier = Modifier.align(Alignment.End)
             )
         }
         Column(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
-        ) {
-            Row(
+        ){
+            Row (
                 modifier = Modifier
                     .weight(1f, false)
                     .padding(dimensionResource(R.dimen.padding_medium))
             ) {
-                Column(
+                Column (
                     verticalArrangement =
                     Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
                 ) {
