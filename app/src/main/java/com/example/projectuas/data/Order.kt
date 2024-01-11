@@ -3,7 +3,7 @@ package com.example.projectuas.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tblSiswa")
+@Entity(tableName = "tblOrder")
 data class Order(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
