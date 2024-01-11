@@ -3,6 +3,7 @@ package com.example.projectuas.ui.halaman
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -134,16 +135,16 @@ fun IsiEdit(
     onSelectionTransaksi: (String) -> Unit,
     onConfirmButtonClicked: (Int) -> Unit,
 ) {
-    var pilihanmakanan by rememberSaveable { mutableStateOf("")    }
-    var pilihantransaksi by rememberSaveable { mutableStateOf("")    }
-    var textJmlMakanan by remember { mutableStateOf("")  }
-    Column (
+    var pilihanmakanan by rememberSaveable { mutableStateOf("") }
+    var pilihantransaksi by rememberSaveable { mutableStateOf("") }
+    var textJmlMakanan by remember { mutableStateOf("") }
+    Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         OutlinedTextField(
             value = detailOrder.nama,
-            onValueChange = {onValueChange(detailOrder.copy(nama = it))},
+            onValueChange = { onValueChange(detailOrder.copy(nama = it)) },
             label = { Text(stringResource(id = R.string.nama)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
@@ -151,7 +152,7 @@ fun IsiEdit(
         )
         OutlinedTextField(
             value = detailOrder.alamat,
-            onValueChange = {onValueChange(detailOrder.copy(alamat = it))},
+            onValueChange = { onValueChange(detailOrder.copy(alamat = it)) },
             label = { Text(stringResource(id = R.string.alamat)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
@@ -159,107 +160,97 @@ fun IsiEdit(
         )
         OutlinedTextField(
             value = detailOrder.noTelp,
-            onValueChange = {onValueChange(detailOrder.copy(noTelp = it))},
+            onValueChange = { onValueChange(detailOrder.copy(noTelp = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             label = { Text(stringResource(id = R.string.notelp)) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
         )
-        Column (modifier= modifier,
-            verticalArrangement = Arrangement.SpaceBetween
-        ){
-            Column (modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column {
-                        Text(
-                            text = "Makanan"
-                        )
-                        menumakanan.forEach { item ->
-                            Row(modifier = Modifier.selectable(
-                                selected = pilihanmakanan == item,
+        Column(
+            modifier = Modifier
+                .weight(1f, false)
+                .padding(dimensionResource(R.dimen.padding_small)),
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = "Makanan"
+                    )
+                    menumakanan.forEach { item ->
+                        Row(modifier = Modifier.selectable(
+                            selected = pilihanmakanan == item,
+                            onClick = {
+                                pilihanmakanan = item
+                                onSelectionMakanan(item)
+                            }
+                        ),
+                            verticalAlignment = Alignment.CenterVertically) {
+                            RadioButton(selected = pilihanmakanan == item,
                                 onClick = {
                                     pilihanmakanan = item
                                     onSelectionMakanan(item)
                                 }
-                            ),
-                                verticalAlignment = Alignment.CenterVertically) {
-                                RadioButton(selected = pilihanmakanan == item,
-                                    onClick = {
-                                        pilihanmakanan = item
-                                        onSelectionMakanan(item)
-                                    }
-                                )
-                                Text(item)
-                            }
-                        }
-                        Divider(
-                            thickness = dimensionResource(R.dimen.thickness_divider),
-                            modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_small))
-                        )
-                        Row(
-                            modifier = Modifier
-                                .padding(dimensionResource(R.dimen.padding_small)),
-                            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
-                        ) {
-                            OutlinedTextField(value = textJmlMakanan,
-                                singleLine = true,
-                                shape = MaterialTheme.shapes.large,
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                modifier = Modifier.width(150.dp),
-                                label = { Text(text = "Jumlah Order") },
-                                onValueChange = { textJmlMakanan = it }
                             )
-                            Button(modifier = Modifier.weight(1f),
-                                enabled = textJmlMakanan.isNotEmpty(),
-                                onClick = {
-                                    onConfirmButtonClicked(textJmlMakanan.toInt())
-                                }) {
-                                Text(stringResource(R.string.confirm))
-                            }
+                            Text(item)
                         }
                     }
-                    Column {
-                        Text(
-                            text = "Transaksi"
-                        )
-                        transaksi.forEach { item ->
-                            Row(modifier = Modifier.selectable(
-                                selected = pilihantransaksi == item,
+                }
+                Spacer(modifier = Modifier.padding(2.dp))
+                Column {
+                    Text(
+                        text = "Transaksi"
+                    )
+                    transaksi.forEach { item ->
+                        Row(modifier = Modifier.selectable(
+                            selected = pilihantransaksi == item,
+                            onClick = {
+                                pilihantransaksi = item
+                                onSelectionTransaksi(item)
+                            }
+                        ),
+                            verticalAlignment = Alignment.CenterVertically) {
+                            RadioButton(selected = pilihantransaksi == item,
                                 onClick = {
                                     pilihantransaksi = item
                                     onSelectionTransaksi(item)
                                 }
-                            ),
-                                verticalAlignment = Alignment.CenterVertically) {
-                                RadioButton(selected = pilihantransaksi == item,
-                                    onClick = {
-                                        pilihantransaksi = item
-                                        onSelectionTransaksi(item)
-                                    }
-                                )
-                                Text(item)
-                            }
+                            )
+                            Text(item)
                         }
                     }
-                    Divider(
-                        thickness = dimensionResource(R.dimen.thickness_divider),
-                        modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_medium))
-                    )
                 }
             }
-        }
-        if (enabled) {
-            Text(text = stringResource(id = R.string.order),
-                modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_medium))
+            Divider(
+                thickness = dimensionResource(R.dimen.thickness_divider),
+                modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_small))
             )
-        }
-        Divider(
-            thickness = dimensionResource(id = R.dimen.padding_small),
-            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_medium))
-        )
+            Row(
+                modifier = Modifier
+                    .padding(dimensionResource(R.dimen.padding_small)),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
+            ) {
+                OutlinedTextField(value = textJmlMakanan,
+                    singleLine = true,
+                    shape = MaterialTheme.shapes.large,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.width(150.dp),
+                    label = { Text(text = "Jumlah Order") },
+                    onValueChange = { textJmlMakanan = it }
+                )
+                Button(modifier = Modifier.weight(1f),
+                    enabled = textJmlMakanan.isNotEmpty(),
+                    onClick = {
+                        onConfirmButtonClicked(textJmlMakanan.toInt())
+                    }) {
+                    Text(stringResource(R.string.confirm))
+                }
+            }
 
+        }
     }
 }
