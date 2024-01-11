@@ -18,9 +18,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.projectuas.R
 import com.example.projectuas.model.MenuViewModel
 import com.example.projectuas.model.RiwayatViewModel
+import com.example.projectuas.ui.halaman.DestinasiForm
 import com.example.projectuas.ui.halaman.DestinasiMenu
 import com.example.projectuas.ui.halaman.DestinasiRiwayat
 import com.example.projectuas.ui.halaman.DestinasiStart
+import com.example.projectuas.ui.halaman.HalamanForm
 import com.example.projectuas.ui.halaman.HalamanMenu
 import com.example.projectuas.ui.halaman.HalamanRiwayat
 import com.example.projectuas.ui.halaman.HomeStart
@@ -67,8 +69,13 @@ fun HostNavigasi(
     ) {
         composable(DestinasiStart.route){
             HomeStart(
-                navigateHome = { navController.navigate(DestinasiMenu.route) } // Pindahkan navigasi ke halaman menu di sini
+                navigateHome = { navController.navigate(DestinasiForm.route) } // Pindahkan navigasi ke halaman menu di sini
             )
+        }
+        composable(DestinasiForm.route){
+            HalamanForm(
+                navigateSave = {navController.navigate(DestinasiMenu.route)},
+                navigateCancel = { navController.popBackStack() })
         }
         composable(DestinasiMenu.route){
             HalamanMenu(

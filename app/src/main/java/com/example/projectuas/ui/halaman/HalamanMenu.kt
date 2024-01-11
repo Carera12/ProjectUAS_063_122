@@ -98,6 +98,7 @@ fun IsiMenu(
     var textJmlMakanan by remember { mutableStateOf("")  }
     var textJmlMinuman by remember { mutableStateOf("")  }
 
+
     Column (modifier= modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ){

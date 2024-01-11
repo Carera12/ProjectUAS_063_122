@@ -98,7 +98,10 @@ fun IsiRiwayat(
             )
             Text(text = "No Telepon")
             Text(text = detailOrder.noTelp)
-
+            Divider(
+                thickness =
+                dimensionResource(R.dimen.thickness_divider)
+            )
 
             items.forEach { item ->
                 Column {
