@@ -12,8 +12,13 @@ object PenyediaViewModel {
 
 
         initializer {
+            FormViewModel(
+                aplikasiSiswa().container.repositoriSiswa
+            )
+        }
+
+        initializer {
             RiwayatViewModel(
-                createSavedStateHandle(),
                 aplikasiSiswa().container.repositoriSiswa
             )
         }
