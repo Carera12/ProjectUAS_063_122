@@ -13,9 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.projectuas.R
 import com.example.projectuas.model.MenuViewModel
 import com.example.projectuas.model.RiwayatViewModel
@@ -23,6 +25,10 @@ import com.example.projectuas.ui.halaman.DestinasiForm
 import com.example.projectuas.ui.halaman.DestinasiMenu
 import com.example.projectuas.ui.halaman.DestinasiRiwayat
 import com.example.projectuas.ui.halaman.DestinasiStart
+import com.example.projectuas.ui.halaman.DetailDestinasi
+import com.example.projectuas.ui.halaman.EditDestination
+import com.example.projectuas.ui.halaman.HalamanDetail
+import com.example.projectuas.ui.halaman.HalamanEdit
 import com.example.projectuas.ui.halaman.HalamanForm
 import com.example.projectuas.ui.halaman.HalamanMenu
 import com.example.projectuas.ui.halaman.HalamanRiwayat
@@ -61,8 +67,6 @@ fun OrderTopAppBar(
 @Composable
 fun HostNavigasi(
     navController: NavHostController,
-    modifier: Modifier = Modifier,
-    viewModel: MenuViewModel = viewModel()
 ) {
     NavHost(
         navController = navController,
@@ -75,7 +79,7 @@ fun HostNavigasi(
             )
         }
         composable(DestinasiForm.route){
-            HalamanForm(navigateBack = { navController.navigate(DestinasiRiwayat.route) })
+            HalamanForm(navigateBack = { navController.navigate(DestinasiMenu.route) })
         }
         composable(DestinasiMenu.route){
             HalamanMenu(
@@ -87,7 +91,33 @@ fun HostNavigasi(
         }
 
         composable(DestinasiRiwayat.route){
-            HalamanRiwayat(navigateToItemEntry = { /*TODO*/ })
+            HalamanRiwayat(
+                navigateToItemEntry = { /*TODO*/ },
+                onDetailClick = { itemId -> navController.navigate("${DetailDestinasi.route}/$itemId") },
+            )
+        }
+        composable(
+            DetailDestinasi.routeWithArgs,
+            arguments = listOf(navArgument(DetailDestinasi.orderIdArg) {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getInt(DetailDestinasi.orderIdArg)
+            itemId?.let {
+                HalamanDetail(
+                    navigateToEditItem = {navController.navigate("${EditDestination.route}/$it")} ,
+                    navigateBack = { navController.navigate(DestinasiRiwayat.route) })
+            }
+        }
+        composable(
+            EditDestination.routeWithArgs,
+            arguments = listOf(navArgument(EditDestination.orderIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            HalamanEdit(
+                navigateBack = { navController.navigate(DestinasiRiwayat.route) },
+                onNavigateUp = { navController.navigate(DestinasiMenu.route) })
         }
     }
 }
