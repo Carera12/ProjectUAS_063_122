@@ -36,11 +36,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projectuas.R
 import com.example.projectuas.data.DataOrder.makanan
-import com.example.projectuas.data.DataOrder.minuman
 import com.example.projectuas.data.DataOrder.transaksi
+import com.example.projectuas.data.Order
+import com.example.projectuas.model.DetailOrder
 import com.example.projectuas.model.MenuViewModel
+import com.example.projectuas.model.PenyediaViewModel
+import com.example.projectuas.model.UIStateOrder
 import com.example.projectuas.navigasi.DestinasiNavigasi
 import com.example.projectuas.navigasi.OrderTopAppBar
+import kotlinx.coroutines.launch
 
 object DestinasiMenu : DestinasiNavigasi {
     override val route: String = "Menu"
@@ -52,8 +56,9 @@ fun HalamanMenu(
     navigateSave: () -> Unit,
     navigateCancel: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: MenuViewModel = viewModel()
+    viewModel: MenuViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
+    val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold (
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -68,12 +73,20 @@ fun HalamanMenu(
         ) { innerPadding ->
         val context = LocalContext.current
         IsiMenu(
+            uiStateOrder = viewModel.uiStateOrder,
+            onSiswaValueChange = viewModel::updateUiState,
             menumakanan = makanan.map {id -> context.resources.getString(id)},
             transaksi = transaksi.map {id -> context.resources.getString(id)},
             onSelectionMakanan = {viewModel.setMakanan(it)},
             onSelectionTransaksi = {viewModel.setTransaksi(it)},
-            onConfirmButtonClicked = {jumlah -> viewModel.setJumlah(jumlah)},
-            onNextButtonClicked =    navigateSave,
+            onConfirmButtonClicked = {
+                viewModel.setJumlah(it)},
+            onNextButtonClicked =    {
+                coroutineScope.launch {
+                    viewModel.saveSiswa()
+                    navigateSave()
+                }
+            } ,
             onCancelButtonClicked =  navigateCancel ,
             modifier = Modifier.padding(innerPadding)
         )
@@ -84,6 +97,8 @@ fun HalamanMenu(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IsiMenu(
+    uiStateOrder: UIStateOrder,
+    onSiswaValueChange:(DetailOrder) -> Unit,
     menumakanan: List<String>,
     transaksi: List<String>,
     onSelectionMakanan: (String) -> Unit,
@@ -96,7 +111,6 @@ fun IsiMenu(
     var pilihanmakanan by rememberSaveable { mutableStateOf("")    }
     var pilihantransaksi by rememberSaveable { mutableStateOf("")    }
     var textJmlMakanan by remember { mutableStateOf("")  }
-    var textJmlMinuman by remember { mutableStateOf("")  }
 
 
     Column (modifier= modifier,
@@ -153,7 +167,7 @@ fun IsiMenu(
                 }
                 Column {
                     Text(
-                        text = "Minuman"
+                        text = "Transaksi"
                     )
                     transaksi.forEach { item ->
                         Row(modifier = Modifier.selectable(
