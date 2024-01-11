@@ -21,10 +21,8 @@ import com.example.projectuas.model.RiwayatViewModel
 import com.example.projectuas.ui.halaman.DestinasiMenu
 import com.example.projectuas.ui.halaman.DestinasiRiwayat
 import com.example.projectuas.ui.halaman.DestinasiStart
-import com.example.projectuas.ui.halaman.DestinasiTransaksi
 import com.example.projectuas.ui.halaman.HalamanMenu
 import com.example.projectuas.ui.halaman.HalamanRiwayat
-import com.example.projectuas.ui.halaman.HalamanTransaksi
 import com.example.projectuas.ui.halaman.HomeStart
 
 @Composable
@@ -75,16 +73,16 @@ fun HostNavigasi(
         composable(DestinasiMenu.route){
             HalamanMenu(
                 navigateSave = {
-                    navController.navigate(DestinasiTransaksi.route) },
+                    navController.navigate(DestinasiRiwayat.route) },
                 navigateCancel = { navController.popBackStack() }
             )
         }
-        composable(DestinasiTransaksi.route){
-            HalamanTransaksi(
-                navigateOrder = { navController.navigate(DestinasiRiwayat.route) },
-                navigateNoOrder = { /*TODO*/ }
-            )
-        }
+//        composable(DestinasiTransaksi.route){
+//            HalamanTransaksi(
+//                navigateOrder = { navController.navigate(DestinasiRiwayat.route) },
+//                navigateNoOrder = { /*TODO*/ }
+//            )
+//        }
         composable(DestinasiRiwayat.route){
             HalamanRiwayat(
                 navigateBack = { })

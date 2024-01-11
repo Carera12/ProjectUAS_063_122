@@ -10,6 +10,9 @@ object DataOrder {
         R.string.milk
     )
     val makanan = listOf(
+        R.string.vanilla,
+        R.string.lemon,
+        R.string.milk,
         R.string.paket1,
         R.string.paket2,
         R.string.paket3,
@@ -18,8 +21,6 @@ object DataOrder {
     val transaksi = listOf(
         R.string.mode1,
         R.string.mode2,
-        R.string.mode3,
-        R.string.mode4,
         R.string.mode5
     )
 }

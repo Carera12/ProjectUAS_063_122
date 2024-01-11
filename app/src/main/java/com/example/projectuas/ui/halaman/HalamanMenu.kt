@@ -19,10 +19,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -37,8 +37,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projectuas.R
 import com.example.projectuas.data.DataOrder.makanan
 import com.example.projectuas.data.DataOrder.minuman
+import com.example.projectuas.data.DataOrder.transaksi
 import com.example.projectuas.model.MenuViewModel
-import com.example.projectuas.model.RiwayatViewModel
 import com.example.projectuas.navigasi.DestinasiNavigasi
 import com.example.projectuas.navigasi.OrderTopAppBar
 
@@ -69,10 +69,10 @@ fun HalamanMenu(
         val context = LocalContext.current
         IsiMenu(
             menumakanan = makanan.map {id -> context.resources.getString(id)},
-            menuminuman = minuman.map {id -> context.resources.getString(id)},
+            transaksi = transaksi.map {id -> context.resources.getString(id)},
             onSelectionMakanan = {viewModel.setMakanan(it)},
-            onSelectionMinuman = {viewModel.setMinuman(it)},
-            onConfirmButtonClicked = {viewModel.setJumlah(it)},
+            onSelectionTransaksi = {viewModel.setTransaksi(it)},
+            onConfirmButtonClicked = {jumlah -> viewModel.setJumlah(jumlah)},
             onNextButtonClicked =    navigateSave,
             onCancelButtonClicked =  navigateCancel ,
             modifier = Modifier.padding(innerPadding)
@@ -85,16 +85,16 @@ fun HalamanMenu(
 @Composable
 fun IsiMenu(
     menumakanan: List<String>,
-    menuminuman: List<String>,
+    transaksi: List<String>,
     onSelectionMakanan: (String) -> Unit,
-    onSelectionMinuman: (String) -> Unit,
+    onSelectionTransaksi: (String) -> Unit,
     onConfirmButtonClicked: (Int) -> Unit,
     onNextButtonClicked: () -> Unit,
     onCancelButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ){
     var pilihanmakanan by rememberSaveable { mutableStateOf("")    }
-    var pilihanminuman by rememberSaveable { mutableStateOf("")    }
+    var pilihantransaksi by rememberSaveable { mutableStateOf("")    }
     var textJmlMakanan by remember { mutableStateOf("")  }
     var textJmlMinuman by remember { mutableStateOf("")  }
 
@@ -154,46 +154,22 @@ fun IsiMenu(
                     Text(
                         text = "Minuman"
                     )
-                    menuminuman.forEach { item ->
+                    transaksi.forEach { item ->
                         Row(modifier = Modifier.selectable(
-                            selected = pilihanminuman == item,
+                            selected = pilihantransaksi == item,
                             onClick = {
-                                pilihanminuman = item
-                                onSelectionMinuman(item)
+                                pilihantransaksi = item
+                                onSelectionTransaksi(item)
                             }
                         ),
                             verticalAlignment = Alignment.CenterVertically) {
-                            RadioButton(selected = pilihanminuman == item,
+                            RadioButton(selected = pilihantransaksi == item,
                                 onClick = {
-                                    pilihanminuman = item
-                                    onSelectionMinuman(item)
+                                    pilihantransaksi = item
+                                    onSelectionTransaksi(item)
                                 }
                             )
                             Text(item)
-                        }
-                    }
-                    Divider(
-                        thickness = dimensionResource(R.dimen.thickness_divider),
-                        modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_small))
-                    )
-                    Row (
-                        modifier = Modifier
-                            .padding(dimensionResource(R.dimen.padding_small)),
-                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
-                    ){
-                        OutlinedTextField(value = textJmlMinuman,
-                            singleLine = true,
-                            shape = MaterialTheme.shapes.large,
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                            modifier = Modifier.width(150.dp),
-                            label = { Text(text = "Jumlah Order") },
-                            onValueChange = {textJmlMinuman = it}
-                        )
-                        Button(modifier = Modifier.weight(1f),
-                            enabled = textJmlMinuman.isNotEmpty(),
-                            onClick = {onConfirmButtonClicked(textJmlMinuman.toInt())
-                            }) {
-                            Text(stringResource(R.string.confirm))
                         }
                     }
                 }
@@ -214,7 +190,7 @@ fun IsiMenu(
                 }
                 Button(
                     modifier = Modifier.weight(1f),
-                    enabled = textJmlMakanan.isNotEmpty() && textJmlMinuman.isNotEmpty(),
+                    enabled = textJmlMakanan.isNotEmpty(),
                     onClick = onNextButtonClicked
                 ) {
                     Text(stringResource(R.string.order))

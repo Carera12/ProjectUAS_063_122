@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.text.NumberFormat
 
-private const val HARGA_PER_CUP = 3000
+private const val HARGA_PER_CUP = 5000
 class MenuViewModel : ViewModel() {
     private val _stateUI = MutableStateFlow(DetailOrder())
 
@@ -27,30 +27,44 @@ class MenuViewModel : ViewModel() {
     fun resetOrder(){
         _stateUI.value = DetailOrder()
     }
+
     fun setJumlah(jmlEsJumbo:Int){
         _stateUI.update { stateSaatIni ->
+
             stateSaatIni.copy(
                 jumlah = jmlEsJumbo,
-                harga = hitungHarga(jumlah = jmlEsJumbo)
+                harga = hitungHargaMinuman(jmlEsJumbo)
             )
         }
     }
-    private fun hitungHarga(
+    private fun hitungHargaMinuman(
         jumlah: Int = _stateUI.value.jumlah,
     ): String {
         val kalkulasiHarga = jumlah * HARGA_PER_CUP
 
         return NumberFormat.getNumberInstance().format((kalkulasiHarga))
     }
+//    private fun hitungHargaMakanan(
+//        jumlah: Int = _stateUI.value.jumlah,
+//    ): String {
+//        val kalkulasiHarga = jumlah * HARGA_PER_BOX
+//
+//        return NumberFormat.getNumberInstance().format((kalkulasiHarga))
+//    }
     fun setMakanan(pilih:String){
         _stateUI.update { currentState -> currentState.copy(makanan = pilih)
         }
     }
-
-    fun setMinuman(pilih2:String){
-        _stateUI.update { currentState -> currentState.copy(minuman = pilih2)
+        fun setTransaksi(pilih:String){
+            _stateUI.update { currentState -> currentState.copy(transaksi = pilih)
+            }
         }
-    }
+
+
+//    fun setMinuman(pilih2:String){
+//        _stateUI.update { currentState -> currentState.copy(minuman = pilih2)
+//        }
+//    }
 
 }
 
